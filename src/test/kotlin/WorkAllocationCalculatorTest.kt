@@ -5,6 +5,8 @@ import java.time.LocalDate
 class WorkAllocationCalculatorTest {
 
     private val defaultReportMessage = "The average work allocation is 20% Agile Ceremonies / 70% Feature Development / 10% Administrative"
+    private val reportMessage_30_30_40 = "The average work allocation is 30% Agile Ceremonies / 30% Feature Development / 40% Administrative"
+
     private val day1 = LocalDate.parse("2021-04-01")
     private val day2 = LocalDate.parse("2021-04-02")
     private val day3 = LocalDate.parse("2021-04-03")
@@ -60,7 +62,7 @@ class WorkAllocationCalculatorTest {
 
     @Test
     fun shouldReportAverageWorkAllocationForTwoDifferentWorkAllocations() {
-        val expectedReport = "The average work allocation is 30% Agile Ceremonies / 30% Feature Development / 40% Administrative"
+        val expectedReport = reportMessage_30_30_40
         val calculator =  WorkAllocationCalculator(WorkAllocation())
         val workAllocations = listOf(
             WorkAllocation(day1,10.0, 20.0, 70.0),
@@ -76,7 +78,7 @@ class WorkAllocationCalculatorTest {
 
     @Test
     fun shouldReportAverageWorkAllocationForDateRange() {
-        val expectedReport = "The average work allocation is 30% Agile Ceremonies / 30% Feature Development / 40% Administrative"
+        val expectedReport = reportMessage_30_30_40
         val calculator =  WorkAllocationCalculator(WorkAllocation())
         val workAllocations = listOf(
             WorkAllocation(day1,10.0, 20.0, 70.0),
@@ -108,7 +110,7 @@ class WorkAllocationCalculatorTest {
 
     @Test
     fun shouldReportAverageWorkAllocationForDateRangeSmallerThanRangeRepresentedInList() {
-        val expectedReport = "The average work allocation is 30% Agile Ceremonies / 30% Feature Development / 40% Administrative"
+        val expectedReport = reportMessage_30_30_40
         val calculator =  WorkAllocationCalculator(WorkAllocation())
         val workAllocations = listOf(
             WorkAllocation(day1, 10.0, 20.0, 70.0),
