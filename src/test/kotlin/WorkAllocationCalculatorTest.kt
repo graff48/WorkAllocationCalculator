@@ -1,5 +1,6 @@
 import org.junit.Assert
 import org.junit.Test
+import java.time.LocalDate
 
 class WorkAllocationCalculatorTest {
 
@@ -55,6 +56,22 @@ class WorkAllocationCalculatorTest {
             WorkAllocation(50.0, 40.0, 10.0))
 
         val actualReport = calculator.reportAverageWorkAllocation(workAllocations)
+
+        Assert.assertEquals(expectedReport, actualReport)
+    }
+
+    @Test
+    fun shouldReportAverageWorkAllocationForDateRange() {
+        val expectedReport = "The average work allocation is 30% Agile Ceremonies / 30% Feature Development / 40% Administrative"
+        val calculator =  WorkAllocationCalculator(WorkAllocation())
+        val workAllocations = listOf(
+            WorkAllocation(10.0, 20.0, 70.0),
+            WorkAllocation(50.0, 40.0, 10.0))
+
+        val startDate = LocalDate.parse("2021-04-01")
+        val endDate = LocalDate.parse("2021-04-02")
+
+        val actualReport = calculator.reportAverageWorkAllocation(startDate, endDate, workAllocations)
 
         Assert.assertEquals(expectedReport, actualReport)
     }
