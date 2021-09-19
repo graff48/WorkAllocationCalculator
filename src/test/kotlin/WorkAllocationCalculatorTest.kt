@@ -45,4 +45,17 @@ class WorkAllocationCalculatorTest {
 
         Assert.assertEquals(expectedReport, actualReport)
     }
+
+    @Test
+    fun shouldReportAverageWorkAllocationForTwoDifferentWorkAllocations() {
+        val expectedReport = "The average work allocation is 20% Agile Ceremonies / 70% Story work / 10% Administrative"
+        val calculator =  WorkAllocationCalculator(WorkAllocation())
+        val workAllocations = listOf(
+            WorkAllocation(10.0, 20.0, 70.0),
+            WorkAllocation(50.0, 40.0, 10.0))
+
+        val actualReport = calculator.reportAverageWorkAllocation(workAllocations)
+
+        Assert.assertEquals(expectedReport, actualReport)
+    }
 }
