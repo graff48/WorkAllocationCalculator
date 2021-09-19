@@ -42,7 +42,11 @@ class WorkAllocationCalculatorTest {
     fun shouldReportAverageWorkAllocationForSingleDefaultWorkAllocation() {
         val expectedReport = "The average work allocation is 20% Agile Ceremonies / 70% Feature Development / 10% Administrative"
         val calculator =  WorkAllocationCalculator(WorkAllocation())
-        val actualReport = calculator.reportAverageWorkAllocation(emptyList())
+        val workAllocations: List<WorkAllocation> = emptyList()
+        val startDate = LocalDate.parse("2021-04-01")
+        val endDate = LocalDate.parse("2021-04-02")
+
+        val actualReport = calculator.reportAverageWorkAllocation(startDate, endDate, workAllocations)
 
         Assert.assertEquals(expectedReport, actualReport)
     }
@@ -55,7 +59,10 @@ class WorkAllocationCalculatorTest {
             WorkAllocation(10.0, 20.0, 70.0),
             WorkAllocation(50.0, 40.0, 10.0))
 
-        val actualReport = calculator.reportAverageWorkAllocation(workAllocations)
+        val startDate = LocalDate.parse("2021-04-01")
+        val endDate = LocalDate.parse("2021-04-02")
+
+        val actualReport = calculator.reportAverageWorkAllocation(startDate, endDate, workAllocations)
 
         Assert.assertEquals(expectedReport, actualReport)
     }

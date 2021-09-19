@@ -1,5 +1,6 @@
 import java.math.RoundingMode
 import java.text.NumberFormat
+import java.time.LocalDate
 
 /**Given a collection of WorkAllocation(agile ceremonies, feature development, administrative),  a date range, and a default WorkAllocation - calculate
 the average work across the date range.  Use the default WorkAllocation for any missing or invalid WorkAllocation's
@@ -13,7 +14,7 @@ class WorkAllocationCalculator(val defaultWorkAllocation: WorkAllocation) {
         maximumFractionDigits = 2
     }
 
-    fun reportAverageWorkAllocation(workAllocations: List<WorkAllocation>): String {
+    fun reportAverageWorkAllocation(startDate: LocalDate, endDate: LocalDate, workAllocations: List<WorkAllocation>): String {
         if (workAllocations.isNotEmpty()) {
 
             val movingAvgFunction : (Int, Double, Double ) -> Double = { index, acc, element ->
