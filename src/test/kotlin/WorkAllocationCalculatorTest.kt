@@ -4,6 +4,12 @@ import java.time.LocalDate
 
 class WorkAllocationCalculatorTest {
 
+    private val day1 = LocalDate.parse("2021-04-01")
+    private val day2 = LocalDate.parse("2021-04-02")
+    private val day3 = LocalDate.parse("2021-04-03")
+    private val day4 = LocalDate.parse("2021-04-04")
+    private val day5 = LocalDate.parse("2021-04-05")
+
     @Test
     fun shouldCreateWorkAllocation() {
         val workAllocation = WorkAllocation()
@@ -43,8 +49,8 @@ class WorkAllocationCalculatorTest {
         val expectedReport = "The average work allocation is 20% Agile Ceremonies / 70% Feature Development / 10% Administrative"
         val calculator =  WorkAllocationCalculator(WorkAllocation())
         val workAllocations: List<WorkAllocation> = emptyList()
-        val startDate = LocalDate.parse("2021-04-01")
-        val endDate = LocalDate.parse("2021-04-02")
+        val startDate = day1
+        val endDate = day2
 
         val actualReport = calculator.reportAverageWorkAllocation(startDate, endDate, workAllocations)
 
@@ -56,11 +62,11 @@ class WorkAllocationCalculatorTest {
         val expectedReport = "The average work allocation is 30% Agile Ceremonies / 30% Feature Development / 40% Administrative"
         val calculator =  WorkAllocationCalculator(WorkAllocation())
         val workAllocations = listOf(
-            WorkAllocation(10.0, 20.0, 70.0),
-            WorkAllocation(50.0, 40.0, 10.0))
+            WorkAllocation(day1,10.0, 20.0, 70.0),
+            WorkAllocation(day2,50.0, 40.0, 10.0))
 
-        val startDate = LocalDate.parse("2021-04-01")
-        val endDate = LocalDate.parse("2021-04-02")
+        val startDate = day1
+        val endDate = day2
 
         val actualReport = calculator.reportAverageWorkAllocation(startDate, endDate, workAllocations)
 
@@ -72,11 +78,11 @@ class WorkAllocationCalculatorTest {
         val expectedReport = "The average work allocation is 30% Agile Ceremonies / 30% Feature Development / 40% Administrative"
         val calculator =  WorkAllocationCalculator(WorkAllocation())
         val workAllocations = listOf(
-            WorkAllocation(10.0, 20.0, 70.0),
-            WorkAllocation(50.0, 40.0, 10.0))
+            WorkAllocation(LocalDate.now(),10.0, 20.0, 70.0),
+            WorkAllocation(LocalDate.now(),50.0, 40.0, 10.0))
 
-        val startDate = LocalDate.parse("2021-04-01")
-        val endDate = LocalDate.parse("2021-04-02")
+        val startDate = day1
+        val endDate = day2
 
         val actualReport = calculator.reportAverageWorkAllocation(startDate, endDate, workAllocations)
 
@@ -88,12 +94,12 @@ class WorkAllocationCalculatorTest {
         val expectedReport = "The average work allocation is 30% Agile Ceremonies / 30% Feature Development / 40% Administrative"
         val calculator =  WorkAllocationCalculator(WorkAllocation())
         val workAllocations = listOf(
-            WorkAllocation(10.0, 20.0, 70.0),
-            WorkAllocation(50.0, 40.0, 10.0),
-            WorkAllocation(20.0, 30.0, 50.0))
+            WorkAllocation(day1, 10.0, 20.0, 70.0),
+            WorkAllocation(day2, 50.0, 40.0, 10.0),
+            WorkAllocation(day3,20.0, 30.0, 50.0))
 
-        val startDate = LocalDate.parse("2021-04-01")
-        val endDate = LocalDate.parse("2021-04-02")
+        val startDate = day1
+        val endDate = day2
 
         val actualReport = calculator.reportAverageWorkAllocation(startDate, endDate, workAllocations)
 

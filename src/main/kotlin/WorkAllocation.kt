@@ -1,2 +1,5 @@
-data class WorkAllocation(val agileCeremonies: Double = 20.0, val featureDevelopment: Double = 70.0, val administrative: Double = 10.0) {
+import java.time.LocalDate
+
+data class WorkAllocation(val date: LocalDate, val agileCeremonies: Double, val featureDevelopment: Double, val administrative: Double) {
+    constructor() : this(date = LocalDate.now(), agileCeremonies = 20.0, featureDevelopment = 70.0, administrative = 10.0)
 }

@@ -17,14 +17,17 @@ class WorkAllocationCalculator(val defaultWorkAllocation: WorkAllocation) {
     fun reportAverageWorkAllocation(startDate: LocalDate, endDate: LocalDate, workAllocations: List<WorkAllocation>): String {
         if (workAllocations.isNotEmpty()) {
 
+            //filter allocations not in range
+            val filteredAllocations = workAllocations.filter { it.date in startDate..endDate }
+
             val movingAvgFunction : (Int, Double, Double ) -> Double = { index, acc, element ->
                 (element + (index*acc)) / (index + 1)
             }
 
             //calculate averages
-            val avgAgileCeremonies = workAllocations.map { it.agileCeremonies }.reduceIndexed(movingAvgFunction)
-            val avgFeatureDevelopment = workAllocations.map { it.featureDevelopment }.reduceIndexed(movingAvgFunction)
-            val avgAdministrative = workAllocations.map { it.administrative }.reduceIndexed(movingAvgFunction)
+            val avgAgileCeremonies = filteredAllocations.map { it.agileCeremonies }.reduceIndexed(movingAvgFunction)
+            val avgFeatureDevelopment = filteredAllocations.map { it.featureDevelopment }.reduceIndexed(movingAvgFunction)
+            val avgAdministrative = filteredAllocations.map { it.administrative }.reduceIndexed(movingAvgFunction)
 
             return "The average work allocation is " +
                     "${numberFormatter.format(avgAgileCeremonies)}% Agile Ceremonies" +
