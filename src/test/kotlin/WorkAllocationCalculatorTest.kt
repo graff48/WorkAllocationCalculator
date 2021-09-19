@@ -39,7 +39,7 @@ class WorkAllocationCalculatorTest {
 
     @Test
     fun shouldReportAverageWorkAllocationForSingleDefaultWorkAllocation() {
-        val expectedReport = "The average work allocation is 20% Agile Ceremonies / 70% Story work / 10% Administrative"
+        val expectedReport = "The average work allocation is 20% Agile Ceremonies / 70% Feature Development / 10% Administrative"
         val calculator =  WorkAllocationCalculator(WorkAllocation())
         val actualReport = calculator.reportAverageWorkAllocation(emptyList())
 
