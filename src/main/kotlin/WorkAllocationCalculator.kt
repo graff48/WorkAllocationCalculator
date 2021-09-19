@@ -16,7 +16,6 @@ class WorkAllocationCalculator(val defaultWorkAllocation: WorkAllocation) {
 
     fun reportAverageWorkAllocation(startDate: LocalDate, endDate: LocalDate, workAllocations: List<WorkAllocation>): String {
         if (workAllocations.isNotEmpty()) {
-
             //filter allocations not in range
             val filteredAllocations = workAllocations.filter { it.date in startDate..endDate }
 
@@ -24,15 +23,18 @@ class WorkAllocationCalculator(val defaultWorkAllocation: WorkAllocation) {
                 (element + (index*acc)) / (index + 1)
             }
 
-            //calculate averages
-            val avgAgileCeremonies = filteredAllocations.map { it.agileCeremonies }.reduceIndexed(movingAvgFunction)
-            val avgFeatureDevelopment = filteredAllocations.map { it.featureDevelopment }.reduceIndexed(movingAvgFunction)
-            val avgAdministrative = filteredAllocations.map { it.administrative }.reduceIndexed(movingAvgFunction)
+            if (filteredAllocations.isNotEmpty()) {
+                //calculate averages
+                val avgAgileCeremonies = filteredAllocations.map { it.agileCeremonies }.reduceIndexed(movingAvgFunction)
+                val avgFeatureDevelopment =
+                    filteredAllocations.map { it.featureDevelopment }.reduceIndexed(movingAvgFunction)
+                val avgAdministrative = filteredAllocations.map { it.administrative }.reduceIndexed(movingAvgFunction)
 
-            return "The average work allocation is " +
-                    "${numberFormatter.format(avgAgileCeremonies)}% Agile Ceremonies" +
-                    " / ${numberFormatter.format(avgFeatureDevelopment)}% Feature Development" +
-                    " / ${numberFormatter.format(avgAdministrative)}% Administrative"
+                return "The average work allocation is " +
+                        "${numberFormatter.format(avgAgileCeremonies)}% Agile Ceremonies" +
+                        " / ${numberFormatter.format(avgFeatureDevelopment)}% Feature Development" +
+                        " / ${numberFormatter.format(avgAdministrative)}% Administrative"
+            }
         }
         return defaultReport
     }
