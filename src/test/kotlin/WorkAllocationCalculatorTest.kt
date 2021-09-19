@@ -82,4 +82,21 @@ class WorkAllocationCalculatorTest {
 
         Assert.assertEquals(expectedReport, actualReport)
     }
+
+    @Test
+    fun shouldReportAverageWorkAllocationForDateRangeSmallerThanRangeRepresentedInList() {
+        val expectedReport = "The average work allocation is 30% Agile Ceremonies / 30% Feature Development / 40% Administrative"
+        val calculator =  WorkAllocationCalculator(WorkAllocation())
+        val workAllocations = listOf(
+            WorkAllocation(10.0, 20.0, 70.0),
+            WorkAllocation(50.0, 40.0, 10.0),
+            WorkAllocation(20.0, 30.0, 50.0))
+
+        val startDate = LocalDate.parse("2021-04-01")
+        val endDate = LocalDate.parse("2021-04-02")
+
+        val actualReport = calculator.reportAverageWorkAllocation(startDate, endDate, workAllocations)
+
+        Assert.assertEquals(expectedReport, actualReport)
+    }
 }
