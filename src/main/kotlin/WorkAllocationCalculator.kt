@@ -17,7 +17,7 @@ class WorkAllocationCalculator(val defaultWorkAllocation: WorkAllocation) {
     fun reportAverageWorkAllocation(startDate: LocalDate, endDate: LocalDate, workAllocations: List<WorkAllocation>): String {
         if (workAllocations.isNotEmpty()) {
             //filter allocations not in range
-            val filteredAllocations = workAllocations.filter { it.date in startDate..endDate }
+            val filteredAllocations = workAllocations.filter { it.date in startDate..endDate && it.isValid() }
 
             val movingAvgFunction : (Int, Double, Double ) -> Double = { index, acc, element ->
                 (element + (index*acc)) / (index + 1)

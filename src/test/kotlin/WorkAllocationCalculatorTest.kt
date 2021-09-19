@@ -124,4 +124,35 @@ class WorkAllocationCalculatorTest {
 
         Assert.assertEquals(expectedReport, actualReport)
     }
+
+    @Test
+    fun shouldSubstituteDefaultForSingleInvalidWorkAllocation() {
+        val expectedReport = defaultReportMessage
+        val calculator =  WorkAllocationCalculator(WorkAllocation())
+        val workAllocations = listOf(
+            WorkAllocation(day1,50.01, 40.0, 10.0)) // total allocation is over 100%
+
+        val startDate = day1
+        val endDate = day1
+
+        val actualReport = calculator.reportAverageWorkAllocation(startDate, endDate, workAllocations)
+
+        Assert.assertEquals(expectedReport, actualReport)
+    }
+
+    @Test
+    fun shouldSubstituteDefaultForInvalidWorkAllocationInDataSet() {
+        val expectedReport = "The average work allocation is 15% Agile Ceremonies / 50% Feature Development / 40% Administrative"
+        val calculator =  WorkAllocationCalculator(WorkAllocation())
+        val workAllocations = listOf(
+            WorkAllocation(day1, 10.0, 20.0, 70.0),
+            WorkAllocation(day2,20.0, 30.0, 50.01)) // total allocation is over 100%
+
+        val startDate = day1
+        val endDate = day2
+
+        val actualReport = calculator.reportAverageWorkAllocation(startDate, endDate, workAllocations)
+
+        Assert.assertEquals(expectedReport, actualReport)
+    }
 }
