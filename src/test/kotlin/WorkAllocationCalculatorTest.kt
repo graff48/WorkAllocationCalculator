@@ -11,9 +11,9 @@ class WorkAllocationCalculatorTest {
 
     @Test
     fun shouldReturnDefaultAgileCeremoniesWorkAllocation() {
-        val expectedDefaultValue = 20
+        val expectedDefaultValue = 20.0
         val workAllocation = WorkAllocation()
-        Assert.assertEquals(expectedDefaultValue, workAllocation.agileCeremonies)
+        Assert.assertEquals(expectedDefaultValue, workAllocation.agileCeremonies, 0.0)
     }
 
     @Test
@@ -41,14 +41,14 @@ class WorkAllocationCalculatorTest {
     fun shouldReportAverageWorkAllocationForSingleDefaultWorkAllocation() {
         val expectedReport = "The average work allocation is 20% Agile Ceremonies / 70% Story work / 10% Administrative"
         val calculator =  WorkAllocationCalculator(WorkAllocation())
-        val actualReport = calculator.reportAverageWorkAllocation()
+        val actualReport = calculator.reportAverageWorkAllocation(emptyList())
 
         Assert.assertEquals(expectedReport, actualReport)
     }
 
     @Test
     fun shouldReportAverageWorkAllocationForTwoDifferentWorkAllocations() {
-        val expectedReport = "The average work allocation is 20% Agile Ceremonies / 70% Story work / 10% Administrative"
+        val expectedReport = "The average work allocation is 30% Agile Ceremonies / 30% Feature Development / 40% Administrative"
         val calculator =  WorkAllocationCalculator(WorkAllocation())
         val workAllocations = listOf(
             WorkAllocation(10.0, 20.0, 70.0),
