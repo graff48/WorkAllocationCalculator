@@ -17,10 +17,17 @@ class WorkAllocationCalculatorTest {
     }
 
     @Test
-    fun shouldReturnDefaultStoryWorkWorkAllocation() {
-        val expectedDefaultValue = 20.0
+    fun shouldReturnDefaultFeatureDevelopmentWorkAllocation() {
+        val expectedDefaultValue = 70.0
         val workAllocation = WorkAllocation()
-        Assert.assertEquals(expectedDefaultValue, workAllocation.agileCeremonies, 0.0)
+        Assert.assertEquals(expectedDefaultValue, workAllocation.featureDevelopment, 0.0)
+    }
+
+    @Test
+    fun shouldReturnDefaultAdministrativeWorkAllocation() {
+        val expectedDefaultValue = 10.0
+        val workAllocation = WorkAllocation()
+        Assert.assertEquals(expectedDefaultValue, workAllocation.administrative, 0.0)
     }
 
     @Test
